@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Trivia Game</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <section class="main-section">
+            <div id="gameTitle">
+                <h1> <center>LONGHORN TRIVIA</center> </h1>
+               <p>Time Remaining:<span id="Timer">:60</span></p> 
+                <div data-correct="Kevin Durant" id="0">
+                    <STRONG>Question #1</STRONG>
+                    <p> *Which one of these basketball players is a former Longhorn? </p>
+                    <div id="Answers">
+                        <input type="radio" name="0" class="answer" data-q="0" data-ans="Tim Duncan"/>
+                        Tim Duncan
+                        <input type="radio" name="0" class="answer" data-q="0" data-ans="James Hardin"/>James Hardin
+                        <input type="radio" name="0" class="answer" data-q="0" data-ans="Kevin Durant"/>Kevin Durant
+                        <input type="radio" name="0" class="answer" data-q="0" data-ans="Dwight Howard"/>Dwight Howard
+                    </div>
+                </div>
+                <div data-correct="David Pierce" id="1">
+                    <STRONG>Question #2</STRONG>
+                    <p> *Whos is the current baseball coach of the Texas Longhorn Baseball Team? </p>
+                    <div id="Answers">
+                        <input type="radio" name="1" class="answer" data-q="1" data-ans="William J. Billy Disch"/>
+                        William J. Billy Disch
+                        <input type="radio" name="1" class="answer" data-q="1" data-ans="Augie Garrido"/>Augie Garrido    
+                        <input type="radio" name="1" class="answer" data-q="1" data-ans="Jerry Jones"/>Jerry Jones
+                        <input type="radio" name="1" class="answer" data-q="1" data-ans="David Pierce"/>David Pierce                     
+                    </div>
+                </div>
+                <div data-correct="Earl Campbell" id="2">
+                    <STRONG>Question #3</STRONG>
+                    <p> Who won Texas their first Heisman Trophy?</p>
+                    <div id="Answers">
+                        <input type="radio" name="2" class="answer" data-q="2" data-ans="Earl Campbell"/>
+                        Earl Campbell
+                        <input type="radio" name="2" class="answer" data-q="2" data-ans="Vince Young"/>Vince Young
+                        <input type="radio" name="2" class="answer" data-q="2" data-ans="Mack Brown"/>
+                        Mack Brown
+                        <input type="radio" name="2" class="answer" data-q="2" data-ans="Ricky Williams"/>Ricky Williams
+                    </div>
+                </div>
+                <div data-correct="Disch–Falk Field" id="3">
+                    <STRONG>Question #4</STRONG>
+                    <p> What is the the name of the UT Baseball Field? </p>
+                    <div id="Answers">
+                        <input type="radio" name="3" class="answer" data-q="3" data-ans="Disch–Falk Field"/>
+                        Disch–Falk Field
+                        <input type="radio" name="3" class="answer" data-q="3" data-ans="Bevo's Backyard"/>Bevo's Backyard
+                        <input type="radio" name="3" class="answer" data-q="3" data-ans="McComb's Field"/>
+                        McComb's Field
+                        <input type="radio" name="3" class="answer" data-q="3" data-ans="Darrell K Royal"/>
+                        Darrell K Royal             
+                    </div>
+                </div>
+                <div data-correct="Jordan Speith" id="4">
+                    <STRONG>Question #5</STRONG>
+                    <p> Which one of these athletes won the Masters Tournament?</p>
+                    <div id="Answers">
+                        <input type="radio" name="4" class="answer" data-q="4" data-ans="Colt McCoy"/>
+                        Colt McCoy
+                        <input type="radio" name="4" class="answer" data-q="4" data-ans="Jordan Speith"/>Jordan Speith
+                        <input type="radio" name="4" class="answer" data-q="4" data-ans="Roger Clemens"/>
+                        Roger Clemens
+                        <input type="radio" name="4" class="answer" data-q="4" data-ans="Michelle Carter"/>
+                        Michelle Carter                      
+                    </div>
+                </div>
+                <div id="scoreboard" ></div>
+                <button id="sumbit">SUBMIT!</button>
+            </div>
+        </section>
+    </div>
+        <script type = "text/javascript"
+    src = "https://code.jquery.com/jquery-2.2.0.js" ></script>
+    <script type="text/javascript">
+
+    var game = new Array(5).fill("");
+
+    var displayScore = function() {
+    	var wins = 0;
+    	var losses = 0;
+    	for (var i = 0; i < game.length; i++) {
+			if(game[i]){
+				wins++
+
+			}
+			else {
+				losses++
+    		}
+    	}
+    	var w = $("<p>").html("wins: " + wins)
+    	var l = $("<p>").html("losses: " + losses)
+    	$("#scoreboard").append(w,l)
+    }
+
+    window.onload = function() {
+        var timeleft = 60;
+        var countDownTimer = setInterval(function() {
+            timeleft--;
+            document.getElementById("Timer").textContent = timeleft;
+            if (timeleft === 0) {
+            	clearInterval(countDownTimer);
+            	displayScore();
+            }
+        }, 1000);
+
+    }
+
+    $(".answer").on("click", function() {
+    	var clickedAnswer = $(this).attr("data-ans")
+    	var question = $(this).attr("data-q")
+    	var answer  = $("#" + question).attr("data-correct")
+
+    	if( clickedAnswer == answer) {
+    		game[question] = true;
+    	}
+    	else {
+    		game[question] = false;
+    	}
+    	console.log(game)
+
+
+
+    })
+
+
+    $("#sumbit").on("click",displayScore)
+
+  
+
+    // if( )
+
+
+    </script>
+</body>
+
+</html>
